@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 import { useMemo, useState } from "react";
 
 const MOCK_LISTINGS = [
-  { id: 1, title: "Fresh Pineapples", cropType: "Pineapple", location: "Agartala", price: 25, quantity: "500 kg", contact: { phone: "+91 9876543210", whatsapp: "+919876543210", email: "farmer@example.com" } },
-  { id: 2, title: "Organic Rice", cropType: "Rice", location: "Udaipur", price: 38, quantity: "1 ton", contact: { phone: "+91 9123456780", whatsapp: "+919123456780", email: "farmer2@example.com" } },
+  { id: 1, title: "Fresh Latex", cropType: "Latex", location: "Ambassa", price: 120, quantity: "500 kg", contact: { phone: "+91 9876543210", whatsapp: "+919876543210", email: "farmer@example.com" } },
+  { id: 2, title: "Latex + Wood Bundle", cropType: "Latex + Wood", location: "Udaipur", price: 140, quantity: "1 ton", contact: { phone: "+91 9123456780", whatsapp: "+919123456780", email: "farmer2@example.com" } },
 ];
 
 const Marketplace = () => {
@@ -31,7 +31,7 @@ const Marketplace = () => {
 
         <section aria-label="Browse listings" className="space-y-4">
           <div className="flex flex-col md:flex-row items-center gap-3">
-            <Input placeholder="Search by crop, location, price..." value={query} onChange={(e)=>setQuery(e.target.value)} />
+            <Input placeholder="Search by rubber type, location, price..." value={query} onChange={(e)=>setQuery(e.target.value)} />
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map(l => (

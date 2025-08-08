@@ -11,6 +11,32 @@ export async function suggestPrice(cropType: string, location: string, quantity:
 }
 
 export async function startVoiceInput(): Promise<string> {
-  // Placeholder: integrate browser speech recognition or ElevenLabs STS
-  throw new Error("Voice input requires enabling a speech API key. Coming soon.");
+  return new Promise((resolve, reject) => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      return reject(new Error("This browser doesn't support speech recognition."));
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = (event: any) => {
+      const text = event.results?.[0]?.[0]?.transcript ?? "";
+      resolve(text);
+    };
+    recognition.onerror = (event: any) => {
+      reject(new Error(event.error || "Speech recognition error"));
+    };
+    recognition.onend = () => {
+      // If no result came, resolve empty string to avoid hanging
+      resolve("");
+    };
+
+    try {
+      recognition.start();
+    } catch (e) {
+      reject(new Error("Failed to start speech recognition"));
+    }
+  });
 }

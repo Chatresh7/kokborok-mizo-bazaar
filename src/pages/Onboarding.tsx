@@ -8,7 +8,7 @@ const Onboarding = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    document.title = "Kokborok Sathi Connect – Onboarding";
+    document.title = "Kiching Connect – Onboarding";
   }, []);
 
   return (
@@ -24,7 +24,7 @@ const Onboarding = () => {
         <div className="max-w-2xl">
           <h2 className="text-2xl font-semibold">Welcome!</h2>
           <p className="mt-2 text-muted-foreground">
-            Post and discover farm produce, chat in Kokborok or English, and transact easily with UPI.
+            Post and discover rubber produce, chat in Tripuri, Hindi or English, and transact easily with UPI.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/register/farmer"><Button variant="hero">{t("registerFarmer")}</Button></Link>

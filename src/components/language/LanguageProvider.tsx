@@ -1,17 +1,17 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
-export type Lang = "en" | "kok" | "bn";
+export type Lang = "en" | "hi" | "tr";
 
 type Dict = Record<string, Record<Lang, string>>;
 
 const DICT: Dict = {
-  appTitle: { en: "Kokborok Sathi Connect", kok: "Kokborok Sathi Connect", bn: "কোকবরক সাথি কানেক্ট" },
-  tagline: { en: "Connecting Farmers and Buyers", kok: "Farmers aro Buyers kwrwi", bn: "চাষি ও ক্রেতাদের সংযোগ" },
-  getStarted: { en: "Get Started", kok: "Start", bn: "শুরু করুন" },
-  marketplace: { en: "Marketplace", kok: "Bazaar", bn: "মার্কেটপ্লেস" },
-  registerFarmer: { en: "Register as Farmer", kok: "Farmer Register", bn: "চাষি হিসেবে রেজিস্টার" },
-  registerBuyer: { en: "Register as Buyer", kok: "Buyer Register", bn: "ক্রেতা হিসেবে রেজিস্টার" },
-  login: { en: "Log in", kok: "Login", bn: "লগ ইন" },
+  appTitle: { en: "Kiching Connect", hi: "किचिंग कनेक्ट", tr: "Kiching Connect" },
+  tagline: { en: "Connecting Farmers and Buyers", hi: "किसानों और खरीदारों को जोड़ना", tr: "Farmers aro Buyers kwrwi" },
+  getStarted: { en: "Get Started", hi: "शुरू करें", tr: "Start" },
+  marketplace: { en: "Marketplace", hi: "मार्केटप्लेस", tr: "Bazaar" },
+  registerFarmer: { en: "Register as Farmer", hi: "किसान के रूप में रजिस्टर करें", tr: "Farmer Register" },
+  registerBuyer: { en: "Register as Buyer", hi: "खरीदार के रूप में रजिस्टर करें", tr: "Buyer Register" },
+  login: { en: "Log in", hi: "लॉग इन", tr: "Login" },
 };
 
 interface LanguageContextValue {
@@ -23,7 +23,10 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-  const [lang, setLang] = useState<Lang>(() => (localStorage.getItem("lang") as Lang) || "en");
+  const [lang, setLang] = useState<Lang>(() => {
+    const init = localStorage.getItem("lang") as Lang | null;
+    return (init && (["en","hi","tr"] as Lang[]).includes(init as Lang)) ? (init as Lang) : "en";
+  });
   const value = useMemo<LanguageContextValue>(() => ({
     lang,
     setLang: (l: Lang) => { localStorage.setItem("lang", l); setLang(l); },
@@ -49,11 +52,11 @@ export const LanguageSwitcher = ({ children }: { children: React.ReactNode }) =>
         }}>{children}</div>
       </div>
       <ul className="absolute right-0 mt-2 w-40 rounded-md border bg-background shadow hidden" role="listbox">
-        {(["en","kok","bn"] as Lang[]).map(l => (
+        {(["en","hi","tr"] as Lang[]).map(l => (
           <li key={l} role="option" aria-selected={l===lang}
               className={`px-3 py-2 text-sm cursor-pointer hover:bg-muted ${l===lang?"font-semibold":""}`}
               onClick={(e)=>{ setLang(l); (e.currentTarget.parentElement as HTMLElement).classList.add("hidden"); }}>
-            {l === "en" ? "English" : l === "kok" ? "Kokborok" : "বাংলা"}
+            {l === "en" ? "English" : l === "hi" ? "हिंदी" : "Tripuri"}
           </li>
         ))}
       </ul>

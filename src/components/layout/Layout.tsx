@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import VoiceAssistant from "@/components/voice/VoiceAssistant";
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
@@ -8,6 +9,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       <Navbar />
       <main className="flex-1 container py-8">{children}</main>
       <Footer />
+      <VoiceAssistant />
     </div>
   );
 };

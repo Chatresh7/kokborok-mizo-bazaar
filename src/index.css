@@ -117,3 +117,26 @@ All colors MUST be HSL. */
     box-shadow: 0 0 0 3px hsl(var(--ring) / 0.25);
   }
 }
+
+@layer utilities {
+  @keyframes fade-in { 0% { opacity: 0; transform: translateY(10px) } 100% { opacity: 1; transform: translateY(0) } }
+  @keyframes fade-out { 0% { opacity: 1; transform: translateY(0) } 100% { opacity: 0; transform: translateY(10px) } }
+  @keyframes scale-in { 0% { transform: scale(0.95); opacity: 0 } 100% { transform: scale(1); opacity: 1 } }
+  @keyframes scale-out { 0% { transform: scale(1); opacity: 1 } 100% { transform: scale(0.95); opacity: 0 } }
+  @keyframes slide-in-right { 0% { transform: translateX(100%) } 100% { transform: translateX(0) } }
+  @keyframes slide-out-right { 0% { transform: translateX(0) } 100% { transform: translateX(100%) } }
+
+  .animate-fade-in { animation: fade-in 0.3s ease-out both }
+  .animate-fade-out { animation: fade-out 0.3s ease-out both }
+  .animate-scale-in { animation: scale-in 0.2s ease-out both }
+  .animate-scale-out { animation: scale-out 0.2s ease-out both }
+  .animate-slide-in-right { animation: slide-in-right 0.3s ease-out both }
+  .animate-slide-out-right { animation: slide-out-right 0.3s ease-out both }
+
+  .hover-scale { transition: transform 0.2s ease; }
+  .hover-scale:hover { transform: scale(1.05); }
+
+  .story-link { position: relative; display: inline-block; }
+  .story-link::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: hsl(var(--primary)); transform: scaleX(0); transform-origin: bottom right; transition: transform 0.3s ease; }
+  .story-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+}
